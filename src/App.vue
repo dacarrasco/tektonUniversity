@@ -1,29 +1,33 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <h1>TEKTON UNIVERSITY</h1>
   </nav>
-  <router-view />
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
-<style>
+<style scooped>
+* {
+  background-color: darkcyan;
+  margin: auto;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
-
 nav {
   padding: 30px;
 }
-
+h1 {
+  color: white;
+}
 nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 nav a.router-link-exact-active {
   color: #42b983;
 }
