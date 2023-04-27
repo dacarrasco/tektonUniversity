@@ -27,5 +27,15 @@ App running at:
  
  DEPENDIENDO DE SU PUERTO LIBRE.
  
- ###DESARROLLADO COMO DESAFIO APRA TEKTON LABS SAC
+ ### Para el login de alumno se puede realizar con con el DNI del alumno:
+ * [Alumnos](https://retoolapi.dev/k7LL5B/Alumnos): rest api generator retooldev.com
+Ejemplo DNI: 49829420
+Password: 49829420
+se considero dni y password el mismo, para lograr el ingreso basado en mock data
+
+### Para el login del admin se realiza:
+DNI: 12345678
+y password de la misma manera de Alumno.
+
+###DESARROLLADO COMO DESAFIO PARA TEKTON LABS SAC
 
