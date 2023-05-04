@@ -1,13 +1,15 @@
 <template>
-  <h2>ALUMNO:</h2>
-  <section class="dataCard">
-    <div>DNI: {{ DNI }}</div>
-    <div>Nombres: {{ Nom }}</div>
-    <div>Apellidos: {{ Ap }}</div>
-    <p>Fecha de Nacimiento: {{ FNacimiento }}</p>
-    <p>Direccion: {{ Dir }}</p>
-    <p>Edad: {{ age(FNacimiento) }}</p>
-  </section>
+  <div>
+    <h2>ALUMNO:</h2>
+    <section class="dataCard">
+      <div>DNI: {{ DNI }}</div>
+      <div>Nombres: {{ Nom }}</div>
+      <div>Apellidos: {{ Ap }}</div>
+      <p>Fecha de Nacimiento: {{ FNacimiento }}</p>
+      <p>Direccion: {{ Dir }}</p>
+      <p>Edad: {{ age(FNacimiento) }}</p>
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -59,7 +61,6 @@ export default {
   padding: 20px;
 }
 h2 {
-  color: white;
   align-self: auto;
   position: relative;
   width: auto;

@@ -1,37 +1,92 @@
 <template>
-  <RouterLink class="route" to="/login">Estudiante</RouterLink>
-  <RouterLink class="route" to="loginAdmin">Administrativo</RouterLink>
-  <img
-    src="https://cdn.www.gob.pe/uploads/document/file/3846254/standard_Vista%20interna%20del%20campus%20de%20la%20Universidad%20Nacional%20del%20Callao.jpg.jpg"
-  />
+  <nav>
+    <ul>
+      <li>
+        <RouterLink class="route" to="/login">Estudiante</RouterLink>
+        <span></span><span></span><span></span><span></span>
+      </li>
+      <li>
+        <RouterLink class="route" to="loginAdmin">Administrativo</RouterLink>
+        <span></span><span></span><span></span><span></span>
+      </li>
+    </ul>
+  </nav>
 </template>
 <script lang="ts">
 export default {};
 </script>
 
 <style scoped>
-img {
-  width: 100%;
+* {
+  padding: 0;
+  margin: 0;
+  color: #1a1f36;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
 }
-.route {
-  display: inline-block;
-  padding: 30px;
-  border: thick solid black;
-  border-radius: 15px;
-  margin: 15px 15px 15px 15px;
-  text-decoration: none;
-  color: white;
-  font-weight: bolder;
-  font-size: large;
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
-.route:hover {
-  display: inline-block;
-  padding: 30px;
-  border: thick solid white;
-  border-radius: 15px;
-  margin: 15px 15px 15px 15px;
-  color: blue;
-  font-weight: bolder;
-  font-size: large;
+
+nav ul li {
+  --c: #306090;
+  color: var(--c);
+  font-size: 16px;
+  border: 0.3em solid var(--c);
+  border-radius: 0.5em;
+  width: 12em;
+  height: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  margin: 1em;
+}
+
+nav ul li span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+nav ul li:hover {
+  color: black;
+}
+
+nav ul li:hover span {
+  transform: translateY(0) scale(2);
+}
+
+nav ul li span:nth-child(1) {
+  --n: 1;
+}
+
+nav ul li span:nth-child(2) {
+  --n: 2;
+}
+
+nav ul li span:nth-child(3) {
+  --n: 3;
+}
+
+nav ul li span:nth-child(4) {
+  --n: 4;
 }
 </style>

@@ -31,13 +31,17 @@
     </tr>
   </table>
   <p v-if="!valid">Se require seleccionar al menos un elemento</p>
-  <VButton v-else @click="show = true"> Confirmar Matricula</VButton>
+  <ul v-else>
+    <li @click="show = true">
+      Confirmar Matricula <span></span><span></span><span></span><span></span>
+    </li>
+  </ul>
   <ModalConfirm
     v-model="show"
     title="Confirmacion de matricula"
     @confirm="() => confirm()"
   >
-    <table>
+    <table class="modal-table">
       <tr class="header">
         <td>Codigo</td>
         <td>Nombre</td>
@@ -63,11 +67,11 @@
 import DatosPersonales from "@/components/DatosPersonales.vue";
 import { onMounted, ref } from "vue";
 import alumnoInterface from "@/types/alumnoInterface";
-import getdata from "@/helpers/helper";
+import getdata from "@/API/helper";
 import { useRoute } from "vue-router";
 import cursoInterface from "@/types/cursoInterface";
-import getmatriculadata from "@/helpers/matriculahelper";
-import getcursodata from "@/helpers/cursohelper";
+import getmatriculadata from "@/API/matriculahelper";
+import getcursodata from "@/API/cursohelper";
 import ModalConfirm from "@/components/ModalConfirm.vue";
 import matriculaInterface from "@/types/matriculaInterface";
 import router from "@/router";
@@ -173,10 +177,29 @@ async function postJSON(data: object) {
 table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 70%;
+  width: 100%;
   height: 100%;
+  max-height: 700px;
+  overflow-y: scroll;
+  display: block;
+  margin: 0.5rem;
+  padding-left: 20%;
 }
-
+.modal-table {
+  background-color: lightgray;
+  border-color: solid 1px black;
+  border-collapse: collapse;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  margin-left: 25%;
+  padding-left: 13%;
+}
+.modal-table td th {
+  margin-left: 25%;
+  border: 1px solid black;
+}
 td,
 th {
   border: 1px solid #ddd;
@@ -184,7 +207,7 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: aqua;
+  background-color: lightgray;
 }
 
 tr:hover {
@@ -205,28 +228,69 @@ th {
   width: fit-content;
 }
 
-VButton {
-  width: auto;
-  border: solid white thick;
-  border-radius: 10px;
-  margin: auto;
-  margin-top: 10px;
-  height: auto;
-  color: white;
-  font-weight: bolder;
-  padding: 10px;
-}
-VButton:hover {
-  width: auto;
-  border: solid blue thick;
-  border-radius: 10px;
-  margin: auto;
-  height: auto;
-  color: blue;
-  font-weight: bolder;
-  padding: 10px;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
+ul li {
+  --c: #306090;
+  color: var(--c);
+  font-size: 16px;
+  border: 0.3em solid var(--c);
+  border-radius: 0.5em;
+  width: 12em;
+  height: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  margin: 1em;
+  margin-left: 37%;
+}
+
+ul li span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+ul li:hover {
+  color: black;
+}
+
+ul li:hover span {
+  transform: translateY(0) scale(2);
+}
+
+ul li span:nth-child(1) {
+  --n: 1;
+}
+
+ul li span:nth-child(2) {
+  --n: 2;
+}
+
+ul li span:nth-child(3) {
+  --n: 3;
+}
+ul li span:nth-child(4) {
+  --n: 4;
+}
 p {
   color: red;
   font-weight: bold;

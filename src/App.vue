@@ -9,8 +9,13 @@
 
 <style scooped>
 * {
-  background-color: darkcyan;
-  margin: auto;
+  padding: 0;
+  margin: 0;
+  color: #1a1f36;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -19,16 +24,30 @@
   color: black;
 }
 nav {
-  padding: 30px;
+  padding-top: 0px;
+}
+html,
+body {
+  align-items: center;
+  background: #f2f4f8;
+  border: 0;
+  display: flex;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 h1 {
-  color: white;
+  letter-spacing: -1px;
+}
+a {
+  color: #5469d4;
+  text-decoration: unset;
 }
 nav a {
   font-weight: bold;
   color: #2c3e50;
-}
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>

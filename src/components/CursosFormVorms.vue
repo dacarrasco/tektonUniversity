@@ -44,9 +44,9 @@ const { value: Profesor_Cargo, attrs: Profesor_CargoAttrs } = register(
 </script>
 
 <template>
-  <h1 class="text-2xl mb-4">Formulario Cursos</h1>
-  <p id="comentario"></p>
-  <form @submit="handleSubmit">
+  <form class="form_form" @submit="handleSubmit">
+    <h1 class="text-2xl mb-4">Formulario Cursos</h1>
+    <p id="comentario"></p>
     <div class="field">
       <p id="aCodigo"></p>
       <input
@@ -79,7 +79,7 @@ const { value: Profesor_Cargo, attrs: Profesor_CargoAttrs } = register(
         v-model="Profesor_Cargo"
         class="field__input"
         type="text"
-        placeholder="Nombres"
+        placeholder="Profesor a Cargo"
         v-bind="Profesor_CargoAttrs"
       />
       <div v-show="'Profesor_Cargo' in errors" class="field__error">
@@ -93,7 +93,18 @@ const { value: Profesor_Cargo, attrs: Profesor_CargoAttrs } = register(
   </form>
 </template>
 
-<style>
+<style scooped>
+.form_form {
+  max-width: 50%;
+  margin-left: 25%;
+  background-color: lightgray;
+  margin-top: 10%;
+  padding: 10px;
+  border-radius: 10px;
+}
+.form_form h1 {
+  margin-left: 30%;
+}
 .field + .field {
   margin-top: 15px;
 }

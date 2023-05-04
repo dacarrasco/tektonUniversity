@@ -1,18 +1,22 @@
 <template>
-  <router-link class="route" to="/mantenimiento">
-    <vue-feather type="tool" stroke="white"></vue-feather>
-  </router-link>
+  <ul>
+    <li>
+      <router-link to="/mantenimiento">
+        <vue-feather type="tool" stroke="black"></vue-feather>
+      </router-link>
+      <span></span><span></span><span></span><span></span>
+    </li>
+  </ul>
   <h1>Lista Matriculas</h1>
-  <section>
-    <input
-      class="filtro"
-      v-model="filtro"
-      @change="onCambio"
-      placeholder="Filtro por Alumno"
-    />
-  </section>
-  <table class="customers">
-    <tr>
+
+  <input
+    class="filtro"
+    v-model="filtro"
+    @change="onCambio"
+    placeholder="Filtro por Alumno"
+  />
+  <table>
+    <tr class="header">
       <td>Codigo</td>
       <td>Semestre</td>
       <td>Alumno</td>
@@ -40,16 +44,20 @@
         <vue-feather type="x" stroke="red"></vue-feather>
       </td>
       <td>
-        <button @click="deleteJSON(matricula.id)">Eliminar</button>
+        <ul>
+          <li @click="deleteJSON(matricula.id)">
+            Eliminar <span></span><span></span><span></span><span></span>
+          </li>
+        </ul>
       </td>
     </tr>
   </table>
-  <p v-if="matriculas.length == 0">No Hay Cursos</p>
+  <p v-if="matriculas.length == 0">No Hay Matriculas</p>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import getmatriculadata from "@/helpers/matriculahelper";
+import getmatriculadata from "@/API/matriculahelper";
 import matriculaInterface from "@/types/matriculaInterface";
 
 const filtro = ref<string>("");
@@ -89,85 +97,147 @@ async function deleteJSON(id: string) {
 </script>
 
 <style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  color: #1a1f36;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
+}
+
 .filtro {
-  border: solid white 2px;
+  border: solid black 2px;
   border-radius: 10px;
   width: 50%;
   padding: 10px;
   margin: 20px;
-  color: #ddd;
+  color: black;
+  display: block;
+  margin-left: 25%;
 }
 .filtro::placeholder {
-  color: #ddd;
+  color: black;
 }
-.customers {
+table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 70%;
+  width: 100%;
+  height: 100%;
+  max-height: 700px;
+  overflow-y: scroll;
+  display: block;
+  margin: 0.5rem;
 }
-
-.customers td,
-.customers th {
+.modal-table {
+  background-color: lightgray;
+  border-color: solid 1px black;
+  border-collapse: collapse;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  margin-left: 25%;
+  padding-left: 13%;
+}
+.modal-table td th {
+  margin-left: 25%;
+  border: 1px solid black;
+}
+td,
+th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.customers tr:nth-child(even) {
-  background-color: #f2f2f2;
+tr:nth-child(even) {
+  background-color: lightgray;
 }
 
-.customers tr:hover {
+tr:hover {
   background-color: #ddd;
 }
 
-.customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
+.header {
+  color: #ddd;
+  font-weight: bolder;
+}
+
+th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
   background-color: #04aa6d;
-  color: white;
+  color: black;
+  width: fit-content;
 }
 
-.route {
-  display: inline-block;
-  padding: 10px;
-  border: thick solid black;
-  border-radius: 15px;
-  margin: 15px 15px 15px 15px;
-  text-decoration: none;
-  color: white;
-  font-weight: bolder;
-  font-size: large;
-}
-.route:hover {
-  display: inline-block;
-  padding: 10px;
-  border: thick solid white;
-  border-radius: 15px;
-  margin: 15px 15px 15px 15px;
-  color: blue;
-  font-weight: bolder;
-  font-size: large;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-button {
-  width: auto;
-  border: solid white thick;
-  border-radius: 10px;
-  margin: auto;
-  height: auto;
-  color: white;
-  font-weight: bolder;
-  padding: 10px;
+ul li {
+  --c: #306090;
+  color: var(--c);
+  font-size: 16px;
+  border: 0.3em solid var(--c);
+  border-radius: 0.5em;
+  width: 12em;
+  height: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  margin: 1em;
+  margin-left: 35%;
 }
-button:hover {
-  width: auto;
-  border: solid blue thick;
-  border-radius: 10px;
-  margin: auto;
-  height: auto;
-  color: blue;
-  font-weight: bolder;
-  padding: 10px;
+
+ul li span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+ul li:hover {
+  color: black;
+}
+
+ul li:hover span {
+  transform: translateY(0) scale(2);
+}
+
+ul li span:nth-child(1) {
+  --n: 1;
+}
+
+ul li span:nth-child(2) {
+  --n: 2;
+}
+
+ul li span:nth-child(3) {
+  --n: 3;
+}
+ul li span:nth-child(4) {
+  --n: 4;
+}
+td ul li {
+  font-size: 8px;
+  margin: 0;
 }
 </style>

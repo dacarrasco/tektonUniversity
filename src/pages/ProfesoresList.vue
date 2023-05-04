@@ -1,20 +1,29 @@
 <template>
-  <router-link class="route" to="/mantenimiento">
-    <vue-feather type="tool" stroke="white"></vue-feather>
-  </router-link>
-  <button @click="open">Agregar Profesor</button>
-  <ModalsContainer />
-  <section>
-    <h1>Lista de Profesores</h1>
+  <div>
+    <ul>
+      <li>
+        <router-link to="/mantenimiento">
+          <vue-feather type="tool" stroke="black"></vue-feather>
+        </router-link>
+        <span></span><span></span><span></span><span></span>
+      </li>
+      <li @click="open">
+        Agregar Profesor <span></span><span></span><span></span><span></span>
+      </li>
+    </ul>
+    <ModalsContainer />
+  </div>
+  <h1>Lista de Profesores</h1>
+  <div>
     <input
       class="filtro"
       v-model="filtro"
       @change="onCambio"
       placeholder="Filtro por DNI"
     />
-  </section>
-  <table class="customers">
-    <tr>
+  </div>
+  <table>
+    <tr class="header">
       <td>DNI</td>
       <td>NOMBRES</td>
       <td>APELLIDOS</td>
@@ -40,11 +49,19 @@
         {{ profesor.FNacimiento }}
       </td>
       <td>
-        <button @click="changeId(profesor.id), open()">Editar</button>
+        <ul>
+          <li @click="changeId(profesor.id), open()">
+            Editar <span></span><span></span><span></span><span></span>
+          </li>
+        </ul>
         <ModalsContainer />
       </td>
       <td>
-        <button @click="deleteJSON(profesor.id)">Eliminar</button>
+        <ul>
+          <li @click="deleteJSON(profesor.id)">
+            Eliminar <span></span><span></span><span></span><span></span>
+          </li>
+        </ul>
       </td>
     </tr>
   </table>
@@ -52,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import getprofesordata from "@/helpers/helperprofesor";
+import getprofesordata from "@/API/helperprofesor";
 import { onMounted, ref } from "vue";
 import profesorInterface from "@/types/profesorInterface";
 import { ModalsContainer, useModal } from "vue-final-modal";
@@ -181,86 +198,146 @@ async function deleteJSON(id: string) {
 </script>
 
 <style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  color: #1a1f36;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Ubuntu, sans-serif;
+}
 .filtro {
-  border: solid white 2px;
+  border: solid black 2px;
   border-radius: 10px;
   width: 50%;
   padding: 10px;
   margin: 20px;
-  color: #ddd;
+  color: black;
+  display: block;
+  margin-left: 25%;
 }
 .filtro::placeholder {
-  color: #ddd;
+  color: black;
 }
-.customers {
+table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 70%;
+  width: 100%;
+  height: 100%;
+  max-height: 700px;
+  overflow-y: scroll;
+  display: block;
+  margin: 0.5rem;
 }
-
-.customers td,
-.customers th {
+.modal-table {
+  background-color: lightgray;
+  border-color: solid 1px black;
+  border-collapse: collapse;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  margin-left: 25%;
+  padding-left: 13%;
+}
+.modal-table td th {
+  margin-left: 25%;
+  border: 1px solid black;
+}
+td,
+th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.customers tr:nth-child(even) {
-  background-color: #f2f2f2;
+tr:nth-child(even) {
+  background-color: lightgray;
 }
 
-.customers tr:hover {
+tr:hover {
   background-color: #ddd;
 }
 
-.customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
+.header {
+  color: #ddd;
+  font-weight: bolder;
+}
+
+th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
   background-color: #04aa6d;
-  color: white;
-}
-
-button {
-  width: auto;
-  border: solid white thick;
-  border-radius: 10px;
-  margin: auto;
-  height: auto;
-  color: white;
-  font-weight: bolder;
-  padding: 10px;
-}
-button:hover {
-  width: auto;
-  border: solid blue thick;
-  border-radius: 10px;
-  margin: auto;
-  height: auto;
-  color: blue;
-  font-weight: bolder;
-  padding: 10px;
-}
-
-.route {
-  display: flex;
+  color: black;
   width: fit-content;
-  padding: 10px;
-  border: thick solid white;
-  border-radius: 10px;
-  margin: auto;
-  text-decoration: none;
-  color: white;
-  font-weight: bolder;
-  font-size: large;
 }
-.route:hover {
-  display: flex;
-  padding: 10px;
-  border: thick solid blue;
-  border-radius: 15px;
-  margin: auto;
-  color: blue;
-  font-weight: bolder;
-  font-size: large;
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  --c: #306090;
+  color: var(--c);
+  font-size: 16px;
+  border: 0.3em solid var(--c);
+  border-radius: 0.5em;
+  width: 12em;
+  height: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 3em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  margin: 1em;
+  margin-left: 35%;
+}
+
+ul li span {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 25%);
+  transition: 0.5s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+ul li:hover {
+  color: black;
+}
+
+ul li:hover span {
+  transform: translateY(0) scale(2);
+}
+
+ul li span:nth-child(1) {
+  --n: 1;
+}
+
+ul li span:nth-child(2) {
+  --n: 2;
+}
+
+ul li span:nth-child(3) {
+  --n: 3;
+}
+ul li span:nth-child(4) {
+  --n: 4;
+}
+td ul li {
+  font-size: 8px;
+  margin: 0;
 }
 </style>

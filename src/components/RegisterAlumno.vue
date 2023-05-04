@@ -5,7 +5,7 @@ export type FormData = {
   DNI: number | string;
   LastName: string;
   FirstName: string;
-  Profesion: string;
+  direccion: string;
   FNacimiento: string;
 };
 
@@ -18,7 +18,7 @@ const { register, errors, handleSubmit } = useForm({
     DNI: 0,
     LastName: "",
     FirstName: "",
-    Profesion: "",
+    direccion: "",
     FNacimiento: "",
   },
   onSubmit(values) {
@@ -43,7 +43,7 @@ const { value: FirstName, attrs: FirstNameAttrs } = register("FirstName", {
     if (!value) return "Nombre es Necesario!";
   },
 });
-const { value: Profesion, attrs: ProfesionAttrs } = register("Profesion", {
+const { value: direccion, attrs: direccionAttrs } = register("direccion", {
   validate(value) {
     if (!value) return "Profesion es Necesario!";
   },
@@ -60,10 +60,10 @@ const { value: FNacimiento, attrs: FNacimientoAttrs } = register(
 
 <template>
   <form class="form_form" @submit="handleSubmit">
-    <h1 class="text-2xl mb-4">Formulario Profesor</h1>
+    <h1 class="text-2xl mb-4">Registro de Nuevo Alumno</h1>
     <p id="comentario"></p>
     <div class="field">
-      <p id="aDni"></p>
+      <p id="aDni">DNI</p>
       <input
         v-model="DNI"
         class="field__input"
@@ -76,7 +76,7 @@ const { value: FNacimiento, attrs: FNacimientoAttrs } = register(
       </div>
     </div>
     <div class="field">
-      <p id="aLastName"></p>
+      <p id="aLastName">Apellidos</p>
       <input
         v-model="LastName"
         class="field__input"
@@ -89,7 +89,7 @@ const { value: FNacimiento, attrs: FNacimientoAttrs } = register(
       </div>
     </div>
     <div class="field">
-      <p id="aFirstName"></p>
+      <p id="aFirstName">Nombres</p>
       <input
         v-model="FirstName"
         class="field__input"
@@ -102,20 +102,20 @@ const { value: FNacimiento, attrs: FNacimientoAttrs } = register(
       </div>
     </div>
     <div class="field">
-      <p id="aProfesion"></p>
+      <p id="aProfesion">Direccion</p>
       <input
-        v-model="Profesion"
+        v-model="direccion"
         class="field__input"
         type="text"
-        placeholder="Profesion"
-        v-bind="ProfesionAttrs"
+        placeholder="direccion"
+        v-bind="direccionAttrs"
       />
       <div v-show="'Profesion' in errors" class="field__error">
-        {{ errors.Profesion }}
+        {{ errors.direccion }}
       </div>
     </div>
     <div class="field">
-      <p id="nacimientoText"></p>
+      <p id="nacimientoText">Fecha de Nacimiento</p>
       <input
         v-model="FNacimiento"
         class="field__input"
@@ -129,7 +129,7 @@ const { value: FNacimiento, attrs: FNacimientoAttrs } = register(
     </div>
 
     <div class="field">
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Registrarse como Almuno" />
     </div>
   </form>
 </template>
